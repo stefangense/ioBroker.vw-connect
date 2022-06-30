@@ -2518,6 +2518,7 @@ class VwWeconnect extends utils.Adapter {
         });
     }
     getAudiDataStatus(vin) {
+        this.log.debug("AToken in getAudiDataStatus: " + this.config.atoken);
         return new Promise((resolve, reject) => {
             const statusArray = [
                 {
@@ -2613,6 +2614,7 @@ class VwWeconnect extends utils.Adapter {
     }
 
     getSkodaEValues(vin, type, endpoint) {
+        this.log.debug("AToken in getSkodaEValues: " + this.config.atoken);
         return new Promise((resolve, reject) => {
             const url = "https://api.connect.skoda-auto.cz/api/v1/" + type + "/" + vin + "/" + endpoint;
             this.log.debug(url);
@@ -2663,6 +2665,7 @@ class VwWeconnect extends utils.Adapter {
         });
     }
     setSkodaESettings(vin, action, value, bodyContent) {
+        this.log.debug("AToken in setSkodaESettings: " + this.config.atoken);
         return new Promise(async (resolve, reject) => {
             const pre = this.name + "." + this.instance;
             let body = bodyContent || {};
@@ -3147,6 +3150,7 @@ class VwWeconnect extends utils.Adapter {
         });
     }
     refreshTokenv2() {
+        this.log.debug("AToken in refreshTokenv2: " + this.config.atoken);
         return new Promise((resolve, reject) => {
             this.log.debug("Token Refresh started");
             const body = {
@@ -3202,6 +3206,7 @@ class VwWeconnect extends utils.Adapter {
     }
 
     refreshIDToken() {
+        this.log.debug("AToken in refreshIDToken: " + this.config.atoken);
         return new Promise((resolve, reject) => {
             this.log.debug("Token Refresh started");
             request.get(
@@ -3318,6 +3323,7 @@ class VwWeconnect extends utils.Adapter {
                 accept = "application/json";
             }
             const atoken = this.config.vwatoken;
+            this.log.debug("atoken / vwatoken in getVehicleData: " + atoken);
 
             request.get(
                 {
@@ -3377,6 +3383,7 @@ class VwWeconnect extends utils.Adapter {
     }
 
     getVehicleRights(vin) {
+        this.log.debug("AToken in getVehicleRights: " + this.config.vwatoken);
         return new Promise((resolve, reject) => {
             if (this.config.type === "go" || !this.config.rights) {
                 resolve();
@@ -3465,6 +3472,7 @@ class VwWeconnect extends utils.Adapter {
     }
 
     requestStatusUpdate(vin) {
+        this.log.debug("vwAToken in reqeustStatusUpdate: " + this.config.vwatoken);
         return new Promise((resolve, reject) => {
             try {
                 let method = "POST";
@@ -3531,6 +3539,7 @@ class VwWeconnect extends utils.Adapter {
     }
 
     getVehicleStatus(vin, url, path, element, element2, element3, element4, tripType) {
+        this.log.debug("vwAToken in getAudiVehicleStatus: " + this.config.vwatoken);
         return new Promise((resolve, reject) => {
             url = this.replaceVarInUrl(url, vin, tripType);
             if (path === "tripdata") {
@@ -3990,6 +3999,7 @@ class VwWeconnect extends utils.Adapter {
     }
 
     setVehicleStatus(vin, url, body, contentType, secToken) {
+        this.log.debug("vwAToken in setVehicleStatus: " + this.config.vwatoken);
         return new Promise((resolve, reject) => {
             url = this.replaceVarInUrl(url, vin);
             this.log.debug(JSON.stringify(body));
@@ -4047,6 +4057,7 @@ class VwWeconnect extends utils.Adapter {
         });
     }
     setVehicleStatusv2(vin, url, body, contentType, secToken) {
+        this.log.debug("vwAToken in setVehicleStatusv2: " + this.config.vwatoken);
         return new Promise((resolve, reject) => {
             url = this.replaceVarInUrl(url, vin);
             this.log.debug(JSON.stringify(body));
@@ -4101,6 +4112,7 @@ class VwWeconnect extends utils.Adapter {
         });
     }
     requestSecToken(vin, service) {
+        this.log.debug("vwAToken in requestSecToken: " + this.config.vwatoken);
         return new Promise((resolve, reject) => {
             let url = "https://mal-1a.prd.ece.vwg-connect.com/api/rolesrights/authorization/v2/vehicles/" + vin + "/services/" + service + "/security-pin-auth-requested";
             if (this.homeRegionSetter[vin]) {
@@ -4346,6 +4358,7 @@ class VwWeconnect extends utils.Adapter {
      * @param {ioBroker.State | null | undefined} state
      */
     async onStateChange(id, state) {
+        this.log.debug("AToken in onStateChange: " + this.config.atoken);
         try {
             if (state) {
                 if (!state.ack) {
