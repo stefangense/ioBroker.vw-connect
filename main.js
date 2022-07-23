@@ -3539,7 +3539,7 @@ class VwWeconnect extends utils.Adapter {
     }
 
     getVehicleStatus(vin, url, path, element, element2, element3, element4, tripType) {
-        this.log.debug("vwAToken in getAudiVehicleStatus: " + this.config.vwatoken);
+        this.log.debug("vwAToken in getVehicleStatus: " + this.config.vwatoken);
         return new Promise((resolve, reject) => {
             url = this.replaceVarInUrl(url, vin, tripType);
             if (path === "tripdata") {
