@@ -3318,13 +3318,20 @@ class VwWeconnect extends utils.Adapter {
             }
             let accept = "application/vnd.vwg.mbb.vehicleDataDetail_v2_1_0+json, application/vnd.vwg.mbb.genericError_v1_0_2+json";
             let url = this.replaceVarInUrl("$homeregion/fs-car/vehicleMgmt/vehicledata/v2/$type/$country/vehicles/$vin/", vin);
+            
             if (this.config.type !== "vw" && this.config.type !== "vwv2" && this.config.type !== "audi" && this.config.type !== "id" && this.config.type !== "seat" && this.config.type !== "skoda") {
                 url = this.replaceVarInUrl("https://msg.volkswagen.de/fs-car/promoter/portfolio/v1/$type/$country/vehicle/$vin/carportdata", vin);
                 accept = "application/json";
             }
             const atoken = this.config.vwatoken;
+            this.log.debug("url in getVehicleData: " + url);
             this.log.debug("atoken / vwatoken in getVehicleData: " + atoken);
 
+            this.log.debug("userAgent in getVehicleData: " + this.userAgent);
+            this.log.debug("xappversion in getVehicleData: " + this.xappversion);
+            this.log.debug("xappname in getVehicleData: " + this.xappname);
+            this.log.debug("etags in getVehicleData: " + this.etags[url]);
+            this.log.debug("Accept in getVehicleData: " + accept);
             request.get(
                 {
                     url: url,
@@ -3542,6 +3549,7 @@ class VwWeconnect extends utils.Adapter {
         this.log.debug("vwAToken in getVehicleStatus: " + this.config.vwatoken);
         return new Promise((resolve, reject) => {
             url = this.replaceVarInUrl(url, vin, tripType);
+            this.log.debug("url in getVehicleStatus: " + url);
             if (path === "tripdata") {
                 if (this.tripsActive == false) {
                     resolve();
